@@ -1,9 +1,8 @@
 const models = require('../db/models');
 
 module.exports = {
-
     /**
-     *
+     * Retourne la list des posts
      * @param req
      * @param res
      * @returns {Promise<any>}
@@ -36,7 +35,7 @@ module.exports = {
         }
     },
     /**
-     *
+     * Détails d'un post
      * @param req
      * @param res
      * @returns {Promise<void>}
@@ -58,10 +57,35 @@ module.exports = {
 
         } catch (err) {
             console.error(err);
-            return res.status(500).json(err.errors);
+            return res.status(500).json(err);
+        }
+    },
+    /**
+     * Crée un post avec le user associé
+     * @param req
+     * @param res
+     * @returns {Promise<void>}
+     */
+    posts_create: async (req, res) => {
+        console.debug("app => postsController => posts_create()");
+        try {
+
+            let post = await models.Post.create(req.body);
+
+            return res.status(200).json(post);
+
+        } catch (err) {
+            console.error(err);
+            return res.status(500).json(err)
         }
     },
 
+    /**
+     * Met à jour un post
+     * @param req
+     * @param res
+     * @returns {Promise<any>}
+     */
     posts_update: async (req, res) => {
         console.debug("app => postsController => posts_update()");
 
@@ -84,7 +108,7 @@ module.exports = {
     },
 
     /**
-     *
+     * Supprime un post
      * @param req
      * @param res
      * @returns {Promise<any>}

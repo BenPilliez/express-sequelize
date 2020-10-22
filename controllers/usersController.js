@@ -3,7 +3,7 @@ const models = require('../db/models');
 module.exports = {
 
     /**
-     *
+     * Retourne la list des users
      * @param req
      * @param res
      * @returns {Promise<any>}
@@ -29,12 +29,12 @@ module.exports = {
 
         } catch (err) {
             console.error(err);
-            return res.status(500).json(err.message);
+            return res.status(500).json(err);
         }
     },
 
     /**
-     *
+     * Retour le détails d'un users avec posts
      * @param req
      * @param res
      * @returns {Promise<void>}
@@ -43,7 +43,8 @@ module.exports = {
         console.debug("app => usersController => users_detail()")
         try {
             const user = await models.User.findByPk(req.params.id, {
-                include: [models.Post]
+                include: [models.Post],
+                attributes:['firstname','lastname','id']
             });
 
             if (!user) {
@@ -52,23 +53,35 @@ module.exports = {
             return res.status(200).json(user);
         } catch (err) {
             console.error(err);
-            return res.status(500).json(err.message);
+            return res.status(500).json(err);
         }
     },
+    /**
+     * Crée un user
+     * @param req
+     * @param res
+     * @returns {Promise<this|any>}
+     */
     users_create: async (req, res) => {
         console.debug("app => usersController => users_create()")
 
         try {
 
-            await models.User.create(req.body);
-            return res.sendStatus(201);
+           const user = await models.User.create(req.body);
+            return res.sendStatus(200).json(user);
 
         } catch (err) {
             console.error(err);
-            return res.status(500).json(err.errors);
+            return res.status(500).json(err);
         }
     },
 
+    /**
+     * Met à jour un user s'il existe
+     * @param req
+     * @param res
+     * @returns {Promise<any>}
+     */
     users_update: async (req, res) => {
         console.debug("app => usersController => users_update()")
 
@@ -86,9 +99,15 @@ module.exports = {
 
         } catch (err) {
             console.error(err);
-            res.status(500).json(err.erros);
+            res.status(500).json(err);
         }
     },
+    /**
+     * Supprime un user s'il existe
+     * @param req
+     * @param res
+     * @returns {Promise<any>}
+     */
     users_delete: async (req, res) => {
         console.debug("app => usersController => users_delete()")
 

@@ -12,6 +12,11 @@ module.exports = (sequelize, DataTypes) => {
                 foreignKey: 'userId',
                 onDelete: "CASCADE"
             })
+
+            Post.belongsTo(models.Categories, {
+                foreignKey: 'categoriesId',
+                onDelete: "CASCADE"
+            })
         }
     }
 
