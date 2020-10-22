@@ -9,7 +9,7 @@ module.exports = {
      * @returns {Promise<any>}
      */
     users_get: async (req, res) => {
-        console.debug('Find all users');
+        console.debug("app => usersController => users_get()")
         try {
 
             const limit = parseInt(req.query.perPage) || 10;
@@ -40,7 +40,7 @@ module.exports = {
      * @returns {Promise<void>}
      */
     users_detail: async (req, res) => {
-        console.debug('Find user by Id')
+        console.debug("app => usersController => users_detail()")
         try {
             const user = await models.User.findByPk(req.params.id, {
                 include: [models.Post]
@@ -56,7 +56,7 @@ module.exports = {
         }
     },
     users_create: async (req, res) => {
-        console.debug('Create a new user');
+        console.debug("app => usersController => users_create()")
 
         try {
 
@@ -70,16 +70,19 @@ module.exports = {
     },
 
     users_update: async (req, res) => {
-        console.debug("Update a user")
+        console.debug("app => usersController => users_update()")
 
         try {
 
-            await models.User.update(req.body, {
-                where: {
-                    id: req.params.id
-                }
-            });
-            return res.status(200).json('Ton compte à été mis à jour');
+            let user = await models.User.findByPk(req.params.id);
+
+            if (!user) {
+                return res.status(404).json("Aucun utilisateur avec cet identifiant");
+            }
+
+            user.update(req.body);
+
+            return res.status(200).json(user);
 
         } catch (err) {
             console.error(err);
@@ -87,16 +90,17 @@ module.exports = {
         }
     },
     users_delete: async (req, res) => {
-        console.debug('Delete user')
+        console.debug("app => usersController => users_delete()")
 
         try {
 
-            await models.User.destroy({
-                where: {
-                    id: req.params.id
-                }
-            });
+            let user = await models.User.findByPk(req.params.id);
 
+            if (!user) {
+                return res.status(404).json("Aucun utilisateur avec cet identifiant");
+            }
+
+            user.destroy();
             return res.status(200).json('Compte supprimé');
         } catch (err) {
             console.error(err);
