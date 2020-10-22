@@ -3,6 +3,7 @@ const express = require('express');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const userRouter = require('./routes/users');
+const postRouter = require('./routes/posts');
 
 // Initilisation du server express
 const app = express();
@@ -13,8 +14,10 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(morgan('dev'));
 
+
 // Routage
 app.use('/users', userRouter);
+app.use('/posts', postRouter);
 
 
 

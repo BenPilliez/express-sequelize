@@ -40,7 +40,10 @@ module.exports = (sequelize, DataTypes) => {
             }
         },
         email: {
-            type: DataTypes.STRING, allowNull: false, unique: true, validate: {
+            type: DataTypes.STRING, allowNull: false,
+            unique: {
+                msg: "L'email est déjà pris"
+            }, validate: {
                 notEmpty: {
                     msg: "Il me faut un email"
                 },
@@ -66,6 +69,12 @@ module.exports = (sequelize, DataTypes) => {
             beforeCreate: (user, options) => {
                 const hash = bcrypt.genSaltSync(12);
                 user.password = bcrypt.hashSync(user.password, hash);
+            },
+            beforeUpdate(user, options) {
+                if (user.password) {
+                    const hash = bcrypt.genSaltSync(12);
+                    user.password = bcrypt.hashSync(user.password, hash);
+                }
             }
         },
         sequelize,
