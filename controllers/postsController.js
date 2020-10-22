@@ -8,7 +8,7 @@ module.exports = {
         try {
 
             const limit = parseInt(req.query.perPage) || 10;
-            const page = parseInt(req.query.page) || 1;
+            const page = parseInt(req.query.page) || 0;
             const offset = limit * page;
 
             let posts = await models.Post.findAndCountAll(
