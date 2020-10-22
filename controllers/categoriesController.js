@@ -1,4 +1,5 @@
 const models = require('../db/models');
+const {checkIfExist} = require('../helpers/dbHelper');
 
 module.exports = {
 
@@ -89,7 +90,7 @@ module.exports = {
         console.debug("app => categoriesController => categories_update()");
         try {
 
-            const category = await models.Categories.findByPk(req.params.id);
+            const category = await checkIfExist('Categories', req.params.id);
 
             if (!category) {
                 return res.status(400).json("Aucune catégorie avec cet identifiant");
@@ -115,7 +116,7 @@ module.exports = {
 
         try {
 
-            let category = await models.Categories.findByPk(req.params.id);
+            const category = await checkIfExist('Categories', req.params.id);
 
             if (!category) {
                 return res.status(404).json("Aucune catégorie avec cet identifiant");

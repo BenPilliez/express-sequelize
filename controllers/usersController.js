@@ -1,4 +1,5 @@
 const models = require('../db/models');
+const {checkIfExiste} = require('../helpers/dbHelper');
 
 module.exports = {
 
@@ -44,7 +45,7 @@ module.exports = {
         try {
             const user = await models.User.findByPk(req.params.id, {
                 include: [models.Post],
-                attributes:['firstname','lastname','id']
+                attributes: ['firstname', 'lastname', 'id']
             });
 
             if (!user) {
@@ -67,7 +68,7 @@ module.exports = {
 
         try {
 
-           const user = await models.User.create(req.body);
+            const user = await models.User.create(req.body);
             return res.sendStatus(200).json(user);
 
         } catch (err) {
@@ -87,7 +88,7 @@ module.exports = {
 
         try {
 
-            let user = await models.User.findByPk(req.params.id);
+            let user = await checkIfExiste('User', req.params.id);
 
             if (!user) {
                 return res.status(404).json("Aucun utilisateur avec cet identifiant");
@@ -113,7 +114,7 @@ module.exports = {
 
         try {
 
-            let user = await models.User.findByPk(req.params.id);
+            let user = await checkIfExiste('User', req.params.id);
 
             if (!user) {
                 return res.status(404).json("Aucun utilisateur avec cet identifiant");

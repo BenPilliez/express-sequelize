@@ -1,4 +1,6 @@
 const models = require('../db/models');
+const {checkIfExist} = require('../helpers/dbHelper');
+
 
 module.exports = {
     /**
@@ -91,7 +93,7 @@ module.exports = {
 
         try {
 
-            let post = await models.Post.findByPk(req.params.id);
+            let post = await checkIfExist('Post', req.params.id);
 
             if (!post) {
                 return res.status(404).json("Aucun post avec cet identifiant");
@@ -118,7 +120,7 @@ module.exports = {
 
         try {
 
-            let post = await models.Post.findByPk(req.params.id);
+            let post = await checkIfExist('Post', req.params.id);
 
             if (!post) {
                 return res.status(404).json("Aucun post avec cet identifiant");

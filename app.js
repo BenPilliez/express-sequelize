@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const userRouter = require('./routes/users');
 const postRouter = require('./routes/posts');
 const categoriesRouter = require('./routes/categories');
+const tagsRouter = require('./routes/tags');
 
 // Initilisation du server express
 const app = express();
@@ -19,21 +20,12 @@ app.use(morgan('dev'));
 app.use('/users', userRouter);
 app.use('/posts', postRouter);
 app.use('/categories', categoriesRouter);
+app.use('/tags', tagsRouter);
 
 // 404 Not found
 app.use(function (req, res, next) {
     res.status(404).send('Oops aucune page');
     next();
-});
-
-// error handler
-app.use(function (err, req, res, next) {
-    // set locals, only providing error in development
-    res.locals.message = err.message;
-    res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-    res.status(err.status || 500);
-    res.render('error');
 });
 
 const PORT = process.env.DB_PORT || 8080;
