@@ -63,6 +63,16 @@ module.exports = (sequelize, DataTypes) => {
                 },
                 notNull: true,
             }
+        },
+        roles: {
+            type: DataTypes.STRING,
+            defaultValue: "ROLE_USER",
+            get(){
+                return this.getDataValue('roles').split(",");
+            },
+            set(value){
+                return this.setDataValue('roles', value.join(',') )
+            }
         }
     }, {
         hooks: {
