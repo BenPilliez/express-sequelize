@@ -76,7 +76,12 @@ module.exports = {
 
             user.update(req.body);
 
-            return res.status(200).json(user);
+            return res.status(200).json({
+                id: user.id,
+                firstname: user.firstname,
+                lastname: user.lastname,
+                roles: user.roles
+            });
 
         } catch (err) {
             console.error(err);
