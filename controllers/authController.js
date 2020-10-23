@@ -47,7 +47,6 @@ module.exports = {
             }
 
             let password = user.validatePassword(req.body.password, user.password);
-            console.log(password);
             if (!password) {
                 console.debug("Password incorrect")
                 return res.status(401).json("Utilisateur ou mot de passe incorrect");
@@ -56,7 +55,7 @@ module.exports = {
             let token = jwt.sign(
                 {
                     userId: user.id,
-                    roles: user.roles,
+                    userRoles: user.roles,
                 },
                 process.env.SECRET,
                 {

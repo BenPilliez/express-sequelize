@@ -19,7 +19,8 @@ module.exports = {
 
             let users = await models.User.findAndCountAll({
                 offset: offset,
-                limit: limit
+                limit: limit,
+                attributes:['firstname','lastname','email','createdAt']
             });
 
             if (users.count > 0) {
