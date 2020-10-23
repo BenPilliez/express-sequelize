@@ -2,10 +2,12 @@ require('dotenv').config();
 const express = require('express');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
+const cors = require('cors');
 const userRouter = require('./routes/users');
 const postRouter = require('./routes/posts');
 const categoriesRouter = require('./routes/categories');
 const tagsRouter = require('./routes/tags');
+const authRouter = require('./routes/auth');
 
 // Initilisation du server express
 const app = express();
@@ -15,12 +17,14 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 app.use(cookieParser());
 app.use(morgan('dev'));
+app.use(cors());
 
 // Routage
-app.use('/users', userRouter);
-app.use('/posts', postRouter);
-app.use('/categories', categoriesRouter);
-app.use('/tags', tagsRouter);
+app.use('/api/users', userRouter);
+app.use('/api/posts', postRouter);
+app.use('/api/categories', categoriesRouter);
+app.use('/api/tags', tagsRouter);
+app.use('/api/auth', authRouter);
 
 // 404 Not found
 app.use(function (req, res, next) {

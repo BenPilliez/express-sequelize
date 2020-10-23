@@ -58,26 +58,6 @@ module.exports = {
         }
     },
     /**
-     * Crée un user
-     * @param req
-     * @param res
-     * @returns {Promise<this|any>}
-     */
-    users_create: async (req, res) => {
-        console.debug("app => usersController => users_create()")
-
-        try {
-
-            const user = await models.User.create(req.body);
-            return res.status(200).json(user);
-
-        } catch (err) {
-            console.error(err);
-            return res.status(500).json(err);
-        }
-    },
-
-    /**
      * Met à jour un user s'il existe
      * @param req
      * @param res
