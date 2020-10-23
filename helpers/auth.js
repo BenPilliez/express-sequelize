@@ -6,7 +6,12 @@ module.exports = {
 
         try {
 
-            const token = req.headers.authorization.split(' ')[1];
+            let token = req.headers.authorization.split(' ')[1];
+            if (token.startsWith('Bearer ')) {
+                token = token.slice(7, token.length);
+            } else {
+                return res.status(401).json({error: "JWT mal formé"});
+            }
             const decodedToken = jwt.verify(token, process.env.SECRET);
             const userId = decodedToken.userId;
 
