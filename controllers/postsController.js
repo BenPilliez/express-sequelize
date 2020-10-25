@@ -1,5 +1,6 @@
 const models = require('../db/models');
 const {checkIfExist} = require('../helpers/dbHelper');
+const {getPagingData} = require('../helpers/getPagingData');
 
 
 module.exports = {
@@ -21,12 +22,24 @@ module.exports = {
             let posts = await models.Post.findAndCountAll(
                 {
                     limit: limit,
-                    offset: offset
+                    offset: offset,
+                    include: [
+                        {
+                            model: models.Categories
+                        },
+                        {
+                            model: models.Tags
+                        }
+                    ],
+                    distinct: true
                 }
             );
 
+            console.log(posts.count)
+            const response = getPagingData(posts, page, limit);
+
             if (posts.count > 0) {
-                return res.json(posts.rows)
+                return res.json(response)
             }
 
             return res.json('Aucun posts pour le moment');

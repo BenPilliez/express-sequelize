@@ -32,7 +32,7 @@ app.use(function (req, res, next) {
     next();
 });
 
-const PORT = process.env.DB_PORT || 8080;
+const PORT = process.env.APP_PORT || 8080;
 app.listen(PORT, () => {
     console.log('APP listening on ' + PORT);
 });
