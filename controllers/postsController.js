@@ -61,7 +61,13 @@ module.exports = {
         try {
 
             const post = await models.Post.findByPk(req.params.id, {
-                include: [models.User]
+                include: [
+                    {
+                        model: models.User,
+                        attributes: ['firstname', 'lastname','id']
+                    },
+                    {model: models.Tags}
+                ]
             });
 
             if (!post) {
