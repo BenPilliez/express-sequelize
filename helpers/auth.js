@@ -6,7 +6,8 @@ module.exports = {
 
         try {
 
-            let token = req.headers.authorization.split(' ')[1];
+            let token = req.headers.authorization;
+
             if (token.startsWith('Bearer ')) {
                 token = token.slice(7, token.length);
             } else {
@@ -17,11 +18,11 @@ module.exports = {
 
             //On vérifie dans le param en cas de route users
             if (req.baseUrl === "/api/users" && req.params.id && req.params.id !== userId) {
-                return res.status(401).json("Seul le titulaire peut effectuer cette action");
+                return res.status(401).json({error: "Seul le titulaire peut effectuer cette action"});
             }
             //On vérifie dans le body en cas de posts ou autre
             if (req.body.userId && req.body.userId !== userId) {
-                return res.status(401).json("Seul le titulaire peut effectuer cette action");
+                return res.status(401).json({error: "Seul le titulaire peut effectuer cette action"});
             } else {
                 next();
             }

@@ -8,12 +8,14 @@ const postRouter = require('./routes/posts');
 const categoriesRouter = require('./routes/categories');
 const tagsRouter = require('./routes/tags');
 const authRouter = require('./routes/auth');
+const path = require('path');
 
 // Initilisation du server express
 const app = express();
 
 // Middleware
 app.use(express.urlencoded({extended: true}));
+app.use('/static', express.static(path.join(__dirname, 'public')))
 app.use(express.json());
 app.use(cookieParser());
 app.use(morgan('dev'));

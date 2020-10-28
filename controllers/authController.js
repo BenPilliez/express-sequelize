@@ -43,13 +43,13 @@ module.exports = {
 
             if (!user) {
                 console.debug("User incorrect")
-                return res.status(401).json("Utilisateur ou mot de passe incorrect");
+                return res.status(401).json({error: "Utilisateur ou mot de passe incorrect"});
             }
 
             let password = user.validatePassword(req.body.password, user.password);
             if (!password) {
                 console.debug("Password incorrect")
-                return res.status(401).json("Utilisateur ou mot de passe incorrect");
+                return res.status(401).json({error:"Utilisateur ou mot de passe incorrect"});
             }
 
             let token = jwt.sign(

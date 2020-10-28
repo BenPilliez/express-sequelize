@@ -64,7 +64,7 @@ module.exports = {
                 include: [
                     {
                         model: models.User,
-                        attributes: ['firstname', 'lastname','id']
+                        attributes: ['firstname', 'lastname', 'id']
                     },
                     {model: models.Tags}
                 ]
@@ -90,8 +90,16 @@ module.exports = {
     posts_create: async (req, res) => {
         console.debug("app => postsController => posts_create()");
         try {
+            const body = req.body;
+            if (req.files.length > 0) {
+                body['imageUrl'] = [];
+                req.files.map((file) => {
+                    body['imageUrl'].push(file.filename);
+                })
+                JSON.stringify(body['imageUrl']);
+            }
 
-            let post = await models.Post.create(req.body);
+            let post = await models.Post.create(body);
 
             return res.status(200).json(post);
 
