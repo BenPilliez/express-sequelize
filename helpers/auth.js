@@ -14,6 +14,7 @@ module.exports = {
                 return res.status(401).json({error: "JWT mal formé"});
             }
             const decodedToken = jwt.verify(token, process.env.SECRET);
+            req.user = decodedToken;
             const userId = decodedToken.userId;
 
             //On vérifie dans le param en cas de route users

@@ -38,7 +38,7 @@ module.exports = {
                 where: {
                     email: req.body.email
                 },
-                attributes: ['firstname', 'lastname', 'id', 'roles', 'password']
+                attributes: ['firstname', 'lastname', 'id', 'email', 'roles', 'password']
             });
 
             if (!user) {
@@ -81,6 +81,22 @@ module.exports = {
         } catch (err) {
             console.error(err);
             return res.status(500).json(err);
+        }
+    },
+
+    account: async (req, res) => {
+        try {
+            let user = await models.User.findByPk(req.user.userId, {
+                include: [
+                    {
+                        model: models.Post
+                    }
+                ]
+            })
+            return res.json(user);
+        } catch (err) {
+            console.error(err)
+            return res.status(500).json(err)
         }
     }
 }
