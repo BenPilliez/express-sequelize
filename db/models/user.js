@@ -39,6 +39,12 @@ module.exports = (sequelize, DataTypes) => {
                 }
             }
         },
+        fullname: {
+            type: DataTypes.VIRTUAL,
+            get() {
+                return `${this.firstname} ${this.lastname}`
+            }
+        },
         email: {
             type: DataTypes.STRING, allowNull: false,
             unique: {
@@ -67,11 +73,17 @@ module.exports = (sequelize, DataTypes) => {
         roles: {
             type: DataTypes.STRING,
             defaultValue: "ROLE_USER",
-            get(){
+            get() {
                 return this.getDataValue('roles').split(",");
             },
-            set(value){
-                return this.setDataValue('roles', value.join(',') )
+            set(value) {
+                return this.setDataValue('roles', value.join(','))
+            }
+        },
+        initial: {
+            type: DataTypes.VIRTUAL,
+            get() {
+                return `${this.firstname[0].toUpperCase()}-${this.lastname[0].toUpperCase()}`
             }
         }
     }, {
@@ -91,9 +103,9 @@ module.exports = (sequelize, DataTypes) => {
         modelName: 'User',
     });
     User.prototype.validatePassword = function (password) {
-        try{
+        try {
             return bcrypt.compareSync(password, this.password);
-        }catch(err){
+        } catch (err) {
             console.error(err)
         }
 

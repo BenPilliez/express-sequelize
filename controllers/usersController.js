@@ -20,7 +20,7 @@ module.exports = {
             let users = await models.User.findAndCountAll({
                 offset: offset,
                 limit: limit,
-                attributes:['firstname','lastname','email','createdAt']
+                attributes: ['firstname', 'lastname', 'fullname', 'email', 'initial', 'createdAt']
             });
 
             if (users.count > 0) {
@@ -46,7 +46,7 @@ module.exports = {
         try {
             const user = await models.User.findByPk(req.params.id, {
                 include: [models.Post],
-                attributes: ['firstname', 'lastname', 'id', 'roles']
+                attributes: ['firstname', 'lastname','fullname', 'id', 'initial', 'roles']
             });
 
             if (!user) {

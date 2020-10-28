@@ -64,7 +64,7 @@ module.exports = {
                 include: [
                     {
                         model: models.User,
-                        attributes: ['firstname', 'lastname', 'id']
+                        attributes: ['firstname', 'lastname', 'initial', 'fullname', 'id']
                     },
                     {model: models.Tags}
                 ]

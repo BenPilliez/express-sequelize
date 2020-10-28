@@ -49,7 +49,18 @@ module.exports = (sequelize, DataTypes) => {
                 }
             }
         },
-        imageUrl: {type: DataTypes.STRING, allowNull: true}
+        imageUrl: {type: DataTypes.STRING, allowNull: true},
+        createdAt: {
+            type: DataTypes.DATE,
+            get() {
+                return this.getDataValue('createdAt').toLocaleString('fr-FR', {
+                    weekday: 'long',
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                })
+            }
+        }
     }, {
         sequelize,
         modelName: 'Post',
