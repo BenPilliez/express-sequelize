@@ -9,7 +9,8 @@
   "scripts": {
     "db:init": "sequelize-cli init",
     "db:create": "sequelize db:create && sequelize:db:migrate && sequelize:db:seed:all",
-    "dev": "nodemon app.js"
+    "dev": "nodemon app.js",
+    "start": "node app.js"
   },
   "dependencies": {
     "bcrypt": "^5.0.0",
