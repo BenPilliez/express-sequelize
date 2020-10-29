@@ -33,7 +33,8 @@ app.use(function (req, res, next) {
     res.status(404).send('Oops aucune page');
     next();
 });
+const port = process.env.PORT || 3000;
 
-app.listen(process.env.APP_PORT || 5000, () => {
-    console.log('APP listening on ' + process.env.APP_PORT || 5000);
+app.listen(port, () => {
+    console.log('APP listening on ' + port);
 });
