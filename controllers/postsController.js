@@ -42,7 +42,7 @@ module.exports = {
                 return res.json(response)
             }
 
-            return res.json('Aucun posts pour le moment');
+            return res.status(404).json('Aucun posts pour le moment');
 
         } catch (err) {
             console.error(err);
