@@ -5,7 +5,7 @@ module.exports = {
                 firstName: 'John',
                 lastName: 'Doe',
                 email: 'john@doe.com',
-                password: '$2y$12$H4UZXK/nZ1sc1hffR/xP5eBiNCIZqaW8Yof.t8g2poo7LmgBlLA.y ',
+                password: '$2b$12$3uwvQ8e2yQt79KfjUqKVAeihVgCS/0LZd5N3mapEPTYstugUhl4We',
                 createdAt: new Date(),
                 updatedAt: new Date()
             },
@@ -13,7 +13,7 @@ module.exports = {
                 firstName: 'John',
                 lastName: 'Smith',
                 email: 'john@smith.com',
-                password: '$2y$12$H4UZXK/nZ1sc1hffR/xP5eBiNCIZqaW8Yof.t8g2poo7LmgBlLA.y ',
+                password: '$2b$12$3uwvQ8e2yQt79KfjUqKVAeihVgCS/0LZd5N3mapEPTYstugUhl4We',
                 createdAt: new Date(),
                 updatedAt: new Date()
             },
@@ -21,7 +21,7 @@ module.exports = {
                 firstName: 'John',
                 lastName: 'Stone',
                 email: 'john@stone.com',
-                password: '$2y$12$H4UZXK/nZ1sc1hffR/xP5eBiNCIZqaW8Yof.t8g2poo7LmgBlLA.y ',
+                password: '$2b$12$3uwvQ8e2yQt79KfjUqKVAeihVgCS/0LZd5N3mapEPTYstugUhl4We',
                 createdAt: new Date(),
                 updatedAt: new Date()
             }], {});

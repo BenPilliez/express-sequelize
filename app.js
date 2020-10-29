@@ -34,7 +34,6 @@ app.use(function (req, res, next) {
     next();
 });
 
-const PORT = process.env.APP_PORT || 8080;
-app.listen(PORT, () => {
+app.listen(process.env.APP_PORT || 8000, () => {
     console.log('APP listening on ' + PORT);
 });
