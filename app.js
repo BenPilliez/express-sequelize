@@ -35,5 +35,5 @@ app.use(function (req, res, next) {
 });
 
 app.listen(process.env.APP_PORT || 8000, () => {
-    console.log('APP listening on ' + PORT);
+    console.log('APP listening on ' + process.env.APP_PORT || 8000);
 });
