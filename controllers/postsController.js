@@ -91,7 +91,8 @@ module.exports = {
         console.debug("app => postsController => posts_create()");
         try {
             const body = req.body;
-            if (req.files.length > 0) {
+            console.log(req.files)
+            if (req.files && req.files.length > 0) {
                 body['imageUrl'] = [];
                 req.files.map((file) => {
                     body['imageUrl'].push(file.filename);
