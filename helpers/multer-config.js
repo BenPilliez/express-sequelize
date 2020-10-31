@@ -1,6 +1,8 @@
 const multer = require('multer');
 const {v4: uuid} = require('uuid');
 
+console.debug('app => helpers => multer');
+
 const MIME_TYPES = {
     'image/jpg': 'jpg',
     'image/jpeg': 'jpg',
@@ -9,13 +11,13 @@ const MIME_TYPES = {
 
 const storage = multer.diskStorage({
     destination: (req,file, callback) => {
-        callback(null, 'images')
+        callback(null, 'public/images')
     },
 
     filename: async (req,file,callback) => {
-        const uuid = await uuid();
+        const id = await uuid();
         const extension = MIME_TYPES[file.mimetype];
-        callback(null, `${uuid}.${extension}`)
+        callback(null, `${id}.${extension}`)
     }
 })
 

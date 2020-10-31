@@ -91,17 +91,15 @@ module.exports = {
         console.debug("app => postsController => posts_create()");
         try {
             const body = req.body;
-            console.log(req.files)
             if (req.files && req.files.length > 0) {
                 body['imageUrl'] = [];
                 req.files.map((file) => {
                     body['imageUrl'].push(file.filename);
                 })
-                JSON.stringify(body['imageUrl']);
             }
 
             let post = await models.Post.create(body);
-
+            console.log(post)
             return res.status(200).json(post);
 
         } catch (err) {

@@ -49,7 +49,18 @@ module.exports = (sequelize, DataTypes) => {
                 }
             }
         },
-        imageUrl: {type: DataTypes.STRING, allowNull: true},
+        imageUrl: {
+            type: DataTypes.STRING,
+            allowNull: true,
+            set(value) {
+                return this.setDataValue('imageUrl', value.join(','))
+            },
+            get() {
+                if (this.getDataValue('imageUrl')) {
+                    return this.getDataValue('imageUrl').split(",");
+                }
+            }
+        },
         createdAt: {
             type: DataTypes.DATE,
             get() {

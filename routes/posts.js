@@ -4,6 +4,7 @@ const postsController = require('../controllers/postsController');
 const authHelper = require('../helpers/auth');
 const multer = require('../helpers/multer-config');
 
+
 router.get('/', postsController.posts_get);
 router.get('/:id', postsController.posts_details);
 router.post('/', authHelper.verifToken, multer, postsController.posts_create);
