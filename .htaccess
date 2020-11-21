@@ -1,8 +1,0 @@
-# DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION BEGIN
-PassengerAppRoot "/home/gaux4436/vuejs-back"
-PassengerBaseURI "/vuejs-back"
-PassengerNodejs "/home/gaux4436/nodevenv/vuejs-back/14/bin/node"
-PassengerAppType node
-PassengerStartupFile app.js
-PassengerAppLogFile "/home/gaux4436/vuejs-back/server.log"
-# DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION END
