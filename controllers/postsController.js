@@ -99,7 +99,6 @@ module.exports = {
             }
 
             let post = await models.Post.create(body);
-            console.log(post)
             return res.status(200).json(post);
 
         } catch (err) {

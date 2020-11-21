@@ -10,6 +10,10 @@ const tagsRouter = require('./routes/tags');
 const authRouter = require('./routes/auth');
 const path = require('path');
 
+if (typeof (PhusionPassenger) !== 'undefined') {
+    PhusionPassenger.configure({autoInstall: false});
+}
+
 // Initilisation du server express
 const app = express();
 
@@ -33,8 +37,10 @@ app.use(function (req, res, next) {
     res.status(404).send('Oops aucune page');
     next();
 });
-const port = process.env.PORT || 3000;
 
-app.listen(port, () => {
-    console.log('APP listening on ' + port);
-});
+if (typeof (PhusionPassenger) !== 'undefined') {
+    app.listen('passenger');
+} else {
+    app.listen(process.env.PORT );
+}
+

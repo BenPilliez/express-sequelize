@@ -8,7 +8,7 @@
   "license": "MIT",
   "scripts": {
     "db:init": "sequelize-cli init",
-    "db:create": "sequelize db:create && sequelize:db:migrate && sequelize:db:seed:all",
+    "db:create": "sequelize db:create && sequelize db:migrate && sequelize db:seed:all",
     "dev": "nodemon app.js",
     "start": "node app.js"
   },
